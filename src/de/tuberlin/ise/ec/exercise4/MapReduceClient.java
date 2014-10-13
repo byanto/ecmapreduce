@@ -19,12 +19,13 @@ import com.amazonaws.services.elasticmapreduce.model.StepConfig;
 public class MapReduceClient {
 
 	// TODO
-	private static final String CLUSTER_ID = "j-17Z9IQI4Z0JFQ"; // e.g., "j-1HTE8WKS7SODR"
-	private static final String PATH_TO_JAR_IN_S3 = "s3://tuberliniseec/ecmapreduce-1.0.0.jar"; // e.g., "s3://<yourbucket>/my-jar-location1"
-	private static final String PATH_TO_INPUT = "s3n://elasticmapreduce/samples/wordcount/input";
-	private static final String PATH_TO_OUTPUT_1 = "s3://tuberliniseec/wordcount/output"; // "s3://<yourbucket>/wordcount/output"
-	private static final String PATH_TO_OUTPUT_2 = "s3://tuberliniseec/wordcounta/output"; // "s3://<yourbucket>/wordcounta/output"
-	
+	private static final String CLUSTER_ID = "..."; // e.g., "j-1HTE8WKS7SODR"
+	private static final String PATH_TO_JAR_IN_S3 = "..."; // "s3://<yourbucket>/ecmapreduce-1.0.0.jar"
+	private static final String PATH_TO_INPUT = "s3n://elasticmapreduce/samples/wordcount/input"; // dont change this
+	private static final String PATH_TO_OUTPUT_1 = "..."; // "s3://<yourbucket>/wordcount/output"
+	private static final String PATH_TO_OUTPUT_2 = "..."; // "s3://<yourbucket>/wordcountaba/output"
+	private static final String PATH_TO_OUTPUT_3 = "..."; // "s3://<yourbucket>/palindromecount/output"
+
 	public static void main(String[] args) {
 
 		/*
@@ -52,17 +53,25 @@ public class MapReduceClient {
 				.withJar(PATH_TO_JAR_IN_S3)
 				.withMainClass("de.tuberlin.ise.ec.exercise4.WordCount")
 				.withArgs(PATH_TO_INPUT, PATH_TO_OUTPUT_1);
-		HadoopJarStepConfig wordCountAStep = new HadoopJarStepConfig()
-		.withJar(PATH_TO_JAR_IN_S3)
-		.withMainClass("de.tuberlin.ise.ec.exercise4.WordCountA")
-		.withArgs(PATH_TO_INPUT, PATH_TO_OUTPUT_2);
-		StepConfig wordCountStepConfig = new StepConfig("WordCount", wordCountStep);
-		StepConfig wordCountAStepConfig = new StepConfig("WordCountA", wordCountAStep);
+		HadoopJarStepConfig wordCountABAStep = new HadoopJarStepConfig()
+				.withJar(PATH_TO_JAR_IN_S3)
+				.withMainClass("de.tuberlin.ise.ec.exercise4.WordCountABA")
+				.withArgs(PATH_TO_INPUT, PATH_TO_OUTPUT_2);
+		HadoopJarStepConfig palindromeCountStep = new HadoopJarStepConfig()
+				.withJar(PATH_TO_JAR_IN_S3)
+				.withMainClass("de.tuberlin.ise.ec.exercise4.PalindromeCount")
+				.withArgs(PATH_TO_INPUT, PATH_TO_OUTPUT_3);
+		StepConfig wordCountStepConfig = new StepConfig("WordCount",
+				wordCountStep);
+		StepConfig wordCountABAStepConfig = new StepConfig("WordCountABA",
+				wordCountABAStep);
+		StepConfig palindromeCountStepConfig = new StepConfig(
+				"PalindromeCount", palindromeCountStep);
 
+		// TODO add the missing steps
 		AddJobFlowStepsResult result = client
-				.addJobFlowSteps(new AddJobFlowStepsRequest()
-						.withJobFlowId(CLUSTER_ID).
-						withSteps(wordCountStepConfig, wordCountAStepConfig));
+				.addJobFlowSteps(new AddJobFlowStepsRequest().withJobFlowId(
+						CLUSTER_ID).withSteps(palindromeCountStepConfig));
 		System.out.println(result.getStepIds());
 
 	}
