@@ -9,6 +9,11 @@ import org.apache.hadoop.io.*;
 import org.apache.hadoop.mapred.*;
 import org.apache.hadoop.util.*;
 
+/**
+ * 
+ * Provided by http://www.cloudera.com/content/cloudera/en/documentation/HadoopTutorial/CDH4/Hadoop-Tutorial/ht_wordcount1_source.html
+ *
+ */
 public class WordCount {
 
   public static class Map extends MapReduceBase implements Mapper<LongWritable, Text, Text, IntWritable> {
