@@ -23,7 +23,7 @@ public class MapReduceClient {
 
 	// TODO
 	private static final String CLUSTER_ID = "j-17Z9IQI4Z0JFQ"; // e.g., "j-1HTE8WKS7SODR"
-	private static final String PATH_TO_JAR_IN_S3 = "tuberliniseec"; // e.g., "s3://mybucket/my-jar-location1"
+	private static final String PATH_TO_JAR_IN_S3 = "s3://tuberliniseec/ecmapreduce-1.0.0.jar"; // e.g., "s3://mybucket/my-jar-location1"
 
 	public static void main(String[] args) {
 
