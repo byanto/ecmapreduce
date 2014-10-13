@@ -22,7 +22,7 @@ import com.amazonaws.services.elasticmapreduce.util.StepFactory;
 public class MapReduceClient {
 
 	// TODO
-	private static final String CLUSTER_ID = ""; // e.g., "j-1HTE8WKS7SODR"
+	private static final String CLUSTER_ID = "j-17Z9IQI4Z0JFQ"; // e.g., "j-1HTE8WKS7SODR"
 	private static final String PATH_TO_JAR_IN_S3 = "tuberliniseec"; // e.g., "s3://mybucket/my-jar-location1"
 
 	public static void main(String[] args) {
@@ -50,13 +50,14 @@ public class MapReduceClient {
 		// A custom step
 		HadoopJarStepConfig hadoopConfig1 = new HadoopJarStepConfig()
 				.withJar(PATH_TO_JAR_IN_S3)
-				.withMainClass("de.tuberlin.ise.exercise4.WordCount")
+				.withMainClass("de.tuberlin.ise.ec.exercise4.WordCount")
 				.withArgs("--verbose"); // optional list of arguments
 		StepConfig customStep = new StepConfig("Step1", hadoopConfig1);
 
 		AddJobFlowStepsResult result = client
 				.addJobFlowSteps(new AddJobFlowStepsRequest()
-						.withJobFlowId(CLUSTER_ID).withSteps(customStep));
+						.withJobFlowId(CLUSTER_ID).
+						withSteps(customStep));
 		System.out.println(result.getStepIds());
 
 	}
