@@ -23,8 +23,10 @@ public class MapReduceClient {
 
 	// TODO
 	private static final String CLUSTER_ID = "j-17Z9IQI4Z0JFQ"; // e.g., "j-1HTE8WKS7SODR"
-	private static final String PATH_TO_JAR_IN_S3 = "s3://tuberliniseec/ecmapreduce-1.0.0.jar"; // e.g., "s3://mybucket/my-jar-location1"
-
+	private static final String PATH_TO_JAR_IN_S3 = "s3://tuberliniseec/ecmapreduce-1.0.0.jar"; // e.g., "s3://<yourbucket>/my-jar-location1"
+	private static final String PATH_TO_INPUT = "s3n://elasticmapreduce/samples/wordcount/input";
+	private static final String PATH_TO_OUTPUT = "s3://tuberliniseec/output"; // "s3://<yourbucket>/output"
+	
 	public static void main(String[] args) {
 
 		/*
@@ -51,7 +53,7 @@ public class MapReduceClient {
 		HadoopJarStepConfig hadoopConfig1 = new HadoopJarStepConfig()
 				.withJar(PATH_TO_JAR_IN_S3)
 				.withMainClass("de.tuberlin.ise.ec.exercise4.WordCount")
-				.withArgs("--verbose"); // optional list of arguments
+				.withArgs(PATH_TO_INPUT, PATH_TO_OUTPUT);
 		StepConfig customStep = new StepConfig("Step1", hadoopConfig1);
 
 		AddJobFlowStepsResult result = client
