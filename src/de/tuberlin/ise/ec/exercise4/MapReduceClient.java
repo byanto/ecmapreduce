@@ -19,12 +19,12 @@ import com.amazonaws.services.elasticmapreduce.model.StepConfig;
 public class MapReduceClient {
 
 	// TODO
-	private static final String CLUSTER_ID = "..."; // e.g., "j-1HTE8WKS7SODR"
-	private static final String PATH_TO_JAR_IN_S3 = "..."; // "s3://<yourbucket>/ecmapreduce-1.0.0.jar"
+	private static final String CLUSTER_ID = "j-8OPYV2TDOTYP"; // e.g., "j-1HTE8WKS7SODR"
+	private static final String PATH_TO_JAR_IN_S3 = "s3://ise-tu-berlin-batman/palindrome/ecmapreduce-1.0.0.jar"; // "s3://<yourbucket>/ecmapreduce-1.0.0.jar"
 	private static final String PATH_TO_INPUT = "s3n://elasticmapreduce/samples/wordcount/input"; // dont change this
-	private static final String PATH_TO_OUTPUT_1 = "..."; // "s3://<yourbucket>/wordcount/output"
-	private static final String PATH_TO_OUTPUT_2 = "..."; // "s3://<yourbucket>/wordcountaba/output"
-	private static final String PATH_TO_OUTPUT_3 = "..."; // "s3://<yourbucket>/palindromecount/output"
+	private static final String PATH_TO_OUTPUT_1 = "s3://ise-tu-berlin-batman/wordcount/customjar/output"; // "s3://<yourbucket>/wordcount/output"
+	private static final String PATH_TO_OUTPUT_2 = "s3://ise-tu-berlin-batman/wordcount-aba/output"; // "s3://<yourbucket>/wordcountaba/output"
+	private static final String PATH_TO_OUTPUT_3 = "s3://ise-tu-berlin-batman/palindrome/output"; // "s3://<yourbucket>/palindromecount/output"
 
 	public static void main(String[] args) {
 

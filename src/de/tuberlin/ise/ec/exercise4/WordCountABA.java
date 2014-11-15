@@ -36,8 +36,11 @@ public class WordCountABA {
 		      String line = value.toString();
 		      StringTokenizer tokenizer = new StringTokenizer(line);
 		      while (tokenizer.hasMoreTokens()) {
-		        // TODO only count if the word ends with letters 'aba'
-		        word.set(tokenizer.nextToken());
+		    	  // TODO only count if the word ends with letters 'aba'
+		    	  word.set(tokenizer.nextToken());
+		    	  if (word.toString().endsWith("aba")){
+		    		  output.collect(word, one);
+		    	  }
 		      }
 		    }
 		  }

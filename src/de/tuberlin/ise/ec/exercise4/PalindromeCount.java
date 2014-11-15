@@ -19,6 +19,7 @@ import org.apache.hadoop.mapred.Reducer;
 import org.apache.hadoop.mapred.Reporter;
 import org.apache.hadoop.mapred.TextInputFormat;
 import org.apache.hadoop.mapred.TextOutputFormat;
+import org.hamcrest.core.IsNull;
 
 /**
  * Count the palindromes with at least 5 letters in the text corpus.
@@ -39,6 +40,13 @@ public class PalindromeCount {
 			String line = value.toString();
 			StringTokenizer tokenizer = new StringTokenizer(line);
 			// TODO count palindromes here
+			while(tokenizer.hasMoreTokens()){
+				word.set(tokenizer.nextToken());
+				boolean palindrome = isPalindromeWithAtLeast5Letters(word);
+				if(palindrome){
+					output.collect(word, one);
+				}
+			}
 		}
 	}
 
@@ -58,7 +66,34 @@ public class PalindromeCount {
 	private static boolean isPalindromeWithAtLeast5Letters(Text word) {
 		// TODO check if the word has at least 5 letters
 		// TODO check if the word is a palindrome
-		return false;
+		int length = word.getLength();
+		boolean palindrome = false;
+		if(length >= 5){
+			int idxFirst = 0;
+			int idxLast = length - 1;
+			while(idxLast > idxFirst){
+				if(word.charAt(idxFirst) == word.charAt(idxLast)){
+					palindrome = true;
+					idxFirst++;
+					idxLast--;
+				}else{
+					return false;
+				}
+			}
+			if(isNumber(word)){
+				return false;
+			}
+		}
+		return palindrome;
+	}
+	
+	private static boolean isNumber(Text word){
+		try{
+			Double.parseDouble(word.toString());
+		}catch(NumberFormatException ex){
+			return false;
+		}
+		return true;
 	}
 
 	public static void main(String[] args) throws Exception {
